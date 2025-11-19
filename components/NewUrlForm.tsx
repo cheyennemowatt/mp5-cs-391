@@ -20,6 +20,7 @@ export default function NewUrlForm({
 
             onSubmit={async (e) => {
                 e.preventDefault();
+                const form = e.currentTarget;
                 const formData = new FormData(e.currentTarget);
 
                 try {
@@ -32,7 +33,7 @@ export default function NewUrlForm({
 
                     setError("");
                     append(newUrl);
-                    e.currentTarget.reset(); // optional: clear fields
+                    form.reset();
                 } catch (err: any) {
                     setError(err.message);
                 }
