@@ -22,6 +22,10 @@ export default function NewUrlForm({
                 // Server Action call
                 try {
                     const newUrl = await createNewUrl(formData);
+                    if ("error" in newUrl) {
+                        setError(newUrl.error);
+                        return;
+                    }
                     setError("");
                     append(newUrl);
                 } catch (err: any) {
