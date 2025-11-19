@@ -18,16 +18,21 @@ export default function NewUrlForm({
             className="w-full max-w-3xl bg-pink-200  p-10 shadow-xl
                border border-pink-500"
 
-            action={async (formData) => {
-                // Server Action call
+            onSubmit={async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+
                 try {
                     const newUrl = await createNewUrl(formData);
+
                     if ("error" in newUrl) {
                         setError(newUrl.error);
                         return;
                     }
+
                     setError("");
                     append(newUrl);
+                    e.currentTarget.reset(); // optional: clear fields
                 } catch (err: any) {
                     setError(err.message);
                 }
